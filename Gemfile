@@ -26,3 +26,4 @@ group :test do
 end
 
 gem "validate_url", "~> 1.0", ">= 1.0.15"
+gem 'sidekiq'

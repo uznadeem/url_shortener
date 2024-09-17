@@ -18,7 +18,8 @@ class RedirectionsController < ApplicationController
   end
 
   def redirect
-    @redirection.visits.create!(ip_address: request.remote_ip)
+    LogVisitJob.perform_later(@redirection.id, request.remote_ip)
+
     redirect_to @redirection.url_address, allow_other_host: true
   end
 
