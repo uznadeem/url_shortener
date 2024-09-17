@@ -25,5 +25,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem "browser"
+gem "sidekiq"
 gem "validate_url", "~> 1.0", ">= 1.0.15"
-gem 'sidekiq'

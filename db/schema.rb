@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_17_122220) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_17_151842) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_17_122220) do
     t.bigint "redirection_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "user_agent", null: false
+    t.string "browser", null: false
+    t.string "operating_system", null: false
     t.index ["redirection_id"], name: "index_visits_on_redirection_id"
   end
 
