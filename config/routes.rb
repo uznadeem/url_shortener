@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get "/:alias", to: "redirections#redirect", as: :redirect
   get "/:alias/info", to: "redirections#show", as: :redirection_info
+  get "/:alias/visits", to: "visits#index", as: :redirection_visits
 
   root "redirections#new"
 end
