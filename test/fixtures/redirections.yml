@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url_address: MyString
+  alias: MyString
+
+two:
+  url_address: MyString
+  alias: MyString

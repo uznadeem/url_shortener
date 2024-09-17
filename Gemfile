@@ -24,3 +24,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "validate_url", "~> 1.0", ">= 1.0.15"
