@@ -26,6 +26,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem "async-job", "~> 0.9.2"
+gem "async-job-adapter-active_job", "~> 0.14.1"
 gem "browser"
 gem "sidekiq"
 gem "validate_url", "~> 1.0", ">= 1.0.15"
