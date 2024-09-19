@@ -1,23 +1,25 @@
 <div class="row">
   <div class="col-md-6">
     <div class="bg-light p-5 m-3">
-        <p>
-          <strong>Your Long URL</strong>
-          <%= link_to @redirection.url_address, @redirection.url_address %>
-        </p>
+      <p>
+        <strong>Your Long URL</strong>
+        <%= link_to @redirection.url_address, @redirection.url_address %>
+      </p>
 
-        <p>
-          <strong>Short URL</strong>
-          <%= link_to redirect_url(@redirection.alias), redirect_url(@redirection.alias), target: "_blank" %>
-        </p>
+      <p>
+        <strong>Short URL</strong>
+        <%= link_to redirect_url(@redirection.alias), redirect_url(@redirection.alias), target: "_blank" %>
+      </p>
 
-        <p>
-          <strong>Visit count:</strong>
+      <p>
+        <strong>Visit count:</strong>
+        <span id="visit-count" data-alias="<%= @redirection.alias %>">
           <%= @redirection.visits.count %>
-        </p>
+        </span>
+      </p>
 
-        <%= link_to "Show Statistics", redirection_visits_path(@redirection.alias), class: "btn btn-secondary" %>
-        <%= link_to "Shorten Another", root_path, class: "btn btn-success" %>
+      <%= link_to "Show Statistics", redirection_visits_path(@redirection.alias), class: "btn btn-secondary" %>
+      <%= link_to "Shorten Another", root_path, class: "btn btn-success" %>
     </div>
   </div>
 </div>

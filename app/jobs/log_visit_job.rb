@@ -11,5 +11,7 @@ class LogVisitJob < ApplicationJob
       browser: user_browser.name,
       operating_system: user_browser.platform.name
     )
+
+    VisitsChannel.broadcast_to(redirection, { visits_count: redirection.visits.count })
   end
 end
