@@ -18,7 +18,9 @@ class RedirectionsController < ApplicationController
   end
 
   def redirect
-    LogVisitJob.perform_later(@redirection.id, request.remote_ip, request.user_agent)
+    50.times do
+      LogVisitJob.perform_later(@redirection.id, request.remote_ip, request.user_agent)
+    end
 
     redirect_to @redirection.url_address, allow_other_host: true
   end
