@@ -3,7 +3,10 @@
 
 ## Overview
 
-This is a URL Shortener application built with Ruby on Rails. It allows users to shorten long URLs and track visit statistics, such as the IP address, browser, and operating system of visitors. The project uses Sidekiq for background job processing and stores visit data in a separate table for logging purposes.
+This is a URL Shortener application built with Ruby on Rails. It allows users to shorten long URLs and track visit statistics, such as the IP address, browser, and operating system of visitors. The project uses Sidekiq for background job processing and stores visit data in a separate table for logging purposes. Real-time visit count updates are handled using Action Cable.
+
+<img width="1799" alt="image" src="https://github.com/user-attachments/assets/91bb4e49-f9ac-403b-93c5-46e5ff49c202">
+
 
 ## Features
 
@@ -14,8 +17,9 @@ This is a URL Shortener application built with Ruby on Rails. It allows users to
   - IP Address
   - Browser
   - Operating System
+- Real-time visit count updates with Action Cable
 - Sidekiq integration for background processing
-- Redis as a queue backend for Sidekiq
+- Redis as a queue backend for Sidekiq and Action Cable
 - Bootstrap integration for basic styling
 
 ## Technologies
@@ -23,7 +27,8 @@ This is a URL Shortener application built with Ruby on Rails. It allows users to
 - **Ruby on Rails 7.2.1**
 - **PostgreSQL** for database
 - **Sidekiq** for background job processing
-- **Redis** as the backend for Sidekiq
+- **Redis** as the backend for Sidekiq and Action Cable
+- **Action Cable** for real-time visit count updates
 - **Bootstrap** for UI styling
 - **Capybara** and **RSpec** for testing
 - **Validates URL gem** for URL validation
@@ -82,13 +87,13 @@ This is a URL Shortener application built with Ruby on Rails. It allows users to
 
    Open your browser and navigate to `http://localhost:3000`.
 
-## Background Jobs
+## Real-Time Updates with Action Cable
 
-This application uses Sidekiq to handle background jobs. The main background job in the project is logging visits when a user clicks a shortened URL. The job captures the visitor's IP address, browser, and operating system.
+This application uses Action Cable to update the visit count in real-time. When a new visit is logged, the visit count on the details page of the shortened URL is automatically updated.
 
 ### LogVisitJob
 
-The `LogVisitJob` is responsible for logging the details of each visit to the shortened URL:
+The `LogVisitJob` is responsible for logging the details of each visit to the shortened URL and broadcasting the updated visit count to the client via Action Cable:
 
 ```ruby
 class LogVisitJob < ApplicationJob
@@ -104,6 +109,9 @@ class LogVisitJob < ApplicationJob
       browser: user_browser.name,
       operating_system: user_browser.platform.name
     )
+
+    # Broadcast the updated visit count
+    ActionCable.server.broadcast("redirection_#{redirection.alias}", { visits_count: redirection.visits.count })
   end
 end
 ```
@@ -118,3 +126,4 @@ end
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request or open an Issue.
+
